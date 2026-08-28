@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import attack from "./Images/attack.png";
 import defend from "./Images/defend.png";
 
 function Counter() {
   const [count, setCount] = useState(0);
   const [status, setStatus] = useState("");
+
+  // The above thing can also be achieve with object
+  const [gameStatus, setGameStatus] = useState({
+    count: 0,
+    status: "",
+  });
+  /* There is one complexity with object and with status is that -- if we want to change the state
+    it will assing null value is we don't pass the older or updated value to other object
+    -- To handle this 
+    setGameStatus((prev)=>{
+        ...prev,
+        status : "new"});
+
+    This will preserve the other properties of the object and will update the required on only.
+  */
 
   function handleIncrement() {
     setCount((prevCount) => prevCount + 1);
@@ -65,15 +80,21 @@ function Counter() {
     setCount((prevCount) => prevCount - 1);
   }
 
-  function handleStatus() {
-    setStatus(() => {
-      return count > 0 ? "Won" : "Loss";
-    });
-  }
   function handleReset() {
     setCount(0);
     setStatus("");
   }
+
+  // This let you run the side effects in ur function Component
+  useEffect(() => {
+    if (count >= 5) {
+      setStatus("You Won!!!");
+    } else if (count <= -5) {
+      setStatus("You Lost");
+    } else {
+      setStatus("");
+    }
+  }, [count]);
 
   return (
     <>
@@ -81,8 +102,12 @@ function Counter() {
 
       <div className="container text-center mt-5 text-white">
         <p className="mb-4">Counter : {count}</p>
-        <p className="mb-4">Game status : {status}</p>
-
+        {/* Conditional Rendering */}
+        {/*
+            {condition && jsx}  
+            This is common pattern in React where showing something on UI only when some condition is true.
+        */}
+        {status.length > 0 && <p className="mb-4">Game status : {status}</p>}
         <div className="d-flex justify-content-center gap-3">
           <img
             src={attack}
@@ -101,9 +126,6 @@ function Counter() {
           />
         </div>
         <div className="mt-4 text-center">
-          <button onClick={handleStatus} className="btn btn-primary me-2">
-            Status
-          </button>
           <button onClick={handleReset} className="btn btn-danger">
             Reset
           </button>
