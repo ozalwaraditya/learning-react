@@ -2,6 +2,7 @@ import { useState } from "react";
 import FavoriteContacts from "./FavoriteContacts";
 import GeneralContacts from "./GeneralContacts";
 import AddContact from "./AddContact";
+import AddRandomContact from "./AddRandomContact";
 
 function ContactIndex() {
   const [contactList, setContactList] = useState([
@@ -95,6 +96,15 @@ function ContactIndex() {
     };
   }
 
+  function handleAddRandomContact(contact) {
+    const result = handleAddContact(contact);
+
+    if (result.status === "success") {
+      console.log("Random contact added successfully");
+    } else {
+      console.error(result.message);
+    }
+  }
   function handleRemoveContact() {
     setContactList([]);
   }
@@ -138,7 +148,11 @@ function ContactIndex() {
       <div className="container" style={{ minHeight: "85vh" }}>
         <div className="py-3">
           <div className="row py-2">
-            <div className="col-4">Add Contact</div>
+            <div className="col-4">
+              <AddRandomContact
+                handleAddRandomContact={handleAddRandomContact}
+              />
+            </div>
             <div className="col-6">
               <button
                 onClick={handleRemoveContact}
