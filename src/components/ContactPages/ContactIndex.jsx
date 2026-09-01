@@ -28,6 +28,9 @@ function ContactIndex() {
     },
   ]);
 
+  const [selectedUpdatedContact, setSelectedUpdatedContact] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
   /* This function is drilled down to children component and then invoked there to maniulate the list present in parent/grand-parent component */
   function handleToggleFavorite(contact) {
     setContactList((prevState) => {
@@ -92,17 +95,69 @@ function ContactIndex() {
     };
   }
 
+  function handleRemoveContact() {
+    setContactList([]);
+  }
+
+  function handleUpdateClick(contact) {
+    console.log(contact);
+    setSelectedUpdatedContact(contact);
+    setIsUpdating(true);
+  }
+
+  function handleUpdateContact(contact) {
+    setContactList((prevState) => {
+      return prevState.map((obj) => {
+        if (obj.id == contact.id) {
+          return {
+            ...obj,
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone,
+          };
+        }
+        return obj;
+      });
+    });
+
+    setSelectedUpdatedContact(null);
+    setIsUpdating(false);
+
+    return {
+      status: "success",
+      message: "Contact updated successfully!!!",
+    };
+  }
+
+  function handleCancelUpdateContact() {
+    setSelectedUpdatedContact(null);
+    setIsUpdating(false);
+  }
   return (
     <>
       <div className="container" style={{ minHeight: "85vh" }}>
         <div className="py-3">
           <div className="row py-2">
             <div className="col-4">Add Contact</div>
-            <div className="col-4">Remove Contact</div>
+            <div className="col-6">
+              <button
+                onClick={handleRemoveContact}
+                className="btn btn-danger form-control"
+              >
+                {" "}
+                Remove Button
+              </button>
+            </div>
           </div>
           <div className="py-2">
             <div className="col-12">
-              <AddContact handleAddContact={handleAddContact} />
+              <AddContact
+                isUpdating={isUpdating}
+                selectedUpdatedContact={selectedUpdatedContact}
+                handleAddContact={handleAddContact}
+                handleCancelUpdateContact={handleCancelUpdateContact}
+                handleUpdateContact={handleUpdateContact}
+              />
             </div>
           </div>
           <div className="py-2">
@@ -110,6 +165,8 @@ function ContactIndex() {
               <FavoriteContacts
                 favoriteClick={handleToggleFavorite}
                 deleteClick={handleDeleteContact}
+                updateClick={handleUpdateClick}
+                isUpdating={isUpdating}
                 contacts={contactList.filter((x) => x.isFavorite == true)}
               />
             </div>
@@ -118,6 +175,7 @@ function ContactIndex() {
             <GeneralContacts
               favoriteClick={handleToggleFavorite}
               deleteClick={handleDeleteContact}
+              updateClick={handleUpdateClick}
               contacts={contactList.filter((x) => x.isFavorite != true)}
             />{" "}
           </div>

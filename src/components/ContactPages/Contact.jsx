@@ -28,7 +28,14 @@ function Contact(props) {
         >
           {props.contact.isFavorite ? "⭐ Favorite" : "☆ Add Favorite"}
         </button>
-        <button className="btn btn-primary btn-sm">✏️ Edit</button>
+        <button
+          onClick={() => {
+            props.updateClick(props.contact);
+          }}
+          className="btn btn-primary btn-sm"
+        >
+          ✏️ Edit
+        </button>
 
         <button
           onClick={() => {

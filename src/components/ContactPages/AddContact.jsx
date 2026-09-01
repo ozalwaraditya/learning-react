@@ -1,10 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function AddContact(props) {
   const [messages, setMessages] = useState({
     errorMessage: "",
     successMessage: "",
   });
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  function handleInputChange(e) {
+    // If you want to see / access / update the value typed on IO this is used for that
+
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
+
+  useEffect(() => {
+    if (props.isUpdating && props.selectedUpdatedContact) {
+      setFormData({
+        name: props.selectedUpdatedContact.name,
+        email: props.selectedUpdatedContact.email,
+        phone: props.selectedUpdatedContact.phone,
+      });
+    } else {
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+      });
+    }
+  }, [props.isUpdating, props.selectedUpdatedContact]);
 
   /* Standard way to submit the form */
   function handleAddContactForm(e) {
@@ -25,7 +57,14 @@ function AddContact(props) {
         throw new Error("All fields are required.");
       }
 
-      const response = props.handleAddContact(contactData);
+      const response =
+        props.isUpdating && props.selectedUpdatedContact
+          ? props.handleUpdateContact({
+              ...contactData,
+              id: props.selectedUpdatedContact.id,
+              isFavorite: props.selectedUpdatedContact.isFavorite,
+            })
+          : props.handleAddContact(contactData);
 
       if (response.status === "success") {
         setMessages({
@@ -75,7 +114,7 @@ function AddContact(props) {
         {/* <form action={handleAddContactForm2}> */}
         <div className="row">
           <div className="col-12 text-center text-white-50 mb-3">
-            <h5>Add Contact</h5>
+            <h5>{props.isUpdating ? `Update` : `Add`} Contact</h5>
           </div>
 
           {/* Success Message */}
@@ -99,6 +138,8 @@ function AddContact(props) {
           <div className="col-12 col-md-4 mb-2">
             <input
               name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               type="text"
               className="form-control"
               placeholder="Name..."
@@ -108,6 +149,8 @@ function AddContact(props) {
           <div className="col-12 col-md-4 mb-2">
             <input
               name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               type="email"
               className="form-control"
               placeholder="Email..."
@@ -117,6 +160,8 @@ function AddContact(props) {
           <div className="col-12 col-md-4 mb-2">
             <input
               name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
               type="text"
               className="form-control"
               placeholder="Phone..."
@@ -124,11 +169,19 @@ function AddContact(props) {
           </div>
 
           <div className="col-12 text-center mt-3">
-            <button className="btn btn-success px-4">Add Contact</button>
-
-            <button type="reset" className="btn btn-secondary px-4 ms-2">
-              Clear
+            <button className="btn btn-success px-4">
+              {props.isUpdating ? "Update" : "Add"} Contact
             </button>
+
+            {props.isUpdating && (
+              <button
+                onClick={props.handleCancelUpdateContact}
+                type="reset"
+                className="btn btn-secondary px-4 ms-2"
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </div>
       </form>
