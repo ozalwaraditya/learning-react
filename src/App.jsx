@@ -1,11 +1,7 @@
-import Contact from "./Contact";
-import Counter from "./Counter";
+import AppRouter from "./routes/AppRouter";
 
-export default function App() {
-  return (
-    <div className="flex-fill">
-      {/* <Counter /> */}
-      <Contact />
-    </div>
-  );
+function App() {
+  return <AppRouter />;
 }
+
+export default App;
