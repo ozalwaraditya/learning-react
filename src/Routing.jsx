@@ -1,5 +1,7 @@
+import ProductList from "./pages/product/ProductList";
+
 function Routing() {
-  return <>Routing</>;
+  return <><ProductList/></>;
 }
 
 export default Routing;
