@@ -1,10 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getAllProducts } from "../../data/products";
 
 function ProductDetails() {
   const { id } = useParams();
 
   const products = getAllProducts();
+  const navigate = useNavigate();
 
   const product = products.find((product) => product.id === Number(id));
 
@@ -17,18 +18,24 @@ function ProductDetails() {
           The product you are looking for does not exist.
         </p>
 
-        <Link to="/" className="btn btn-primary">
-          Back
-        </Link>
+        <button
+          className="btn btn-secondary mb-4"
+          onClick={() => window.history.back()}
+        >
+          ← Back
+        </button>
       </div>
     );
   }
 
   return (
     <div className="container mt-5">
-      <Link to="/" className="btn btn-secondary mb-4">
-        Back
-      </Link>
+      <button
+        className="btn btn-secondary mb-4"
+        onClick={() => window.history.back()}
+      >
+        ← Back
+      </button>
 
       <div className="card bg-dark text-white">
         <div className="card-body">

@@ -1,19 +1,25 @@
 import { Link } from "react-router-dom";
 import { getAllProducts } from "../../data/products";
 
-function ProductList() {
+function ProductListByCategory({ title, description, category }) {
   const products = getAllProducts();
+
+  const filteredProducts =
+    category.toLowerCase() === "all"
+      ? getAllProducts()
+      : products.filter(
+          (product) =>
+            product.category.toLowerCase() === category.toLowerCase(),
+        );
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">Products</h2>
+      <h2 className="text-center mb-2">{title}</h2>
 
-      <Link to="/route-o-pedia/category" className="btn btn-success">
-        Category
-      </Link>
+      <p className="text-center text-muted">{description}</p>
 
-      <div className="row pt-5">
-        {products.map((product) => (
+      <div className="row pt-4">
+        {filteredProducts.map((product) => (
           <div className="col-md-4 mb-4" key={product.id}>
             <div className="card bg-dark text-white h-100">
               <div className="card-body">
@@ -24,7 +30,7 @@ function ProductList() {
                 <p className="card-text">Price: ₹{product.price}</p>
 
                 <Link
-                  to={"/route-o-pedia/item/" + product.id}
+                  to={`/route-o-pedia/item/${product.id}`}
                   className="btn btn-primary"
                 >
                   View Details
@@ -33,9 +39,15 @@ function ProductList() {
             </div>
           </div>
         ))}
+
+        {filteredProducts.length === 0 && (
+          <div className="text-center">
+            <p>No products found in this category.</p>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default ProductList;
+export default ProductListByCategory;
