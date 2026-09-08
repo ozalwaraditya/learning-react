@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Images/react.png";
+import { getAuthState, logout } from "../../utility/authUtility";
 
 function Header() {
+  const navigate = useNavigate();
+  const { isAuthenticated, currentUser } = getAuthState();
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark"
@@ -46,34 +54,29 @@ function Header() {
                 Home
               </Link>
             </li>
-
-            {/* Projects */}
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Projects
-              </a>
-
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li>
-                  <Link className="dropdown-item" to="/count-o-pedia">
-                    Counter App
-                  </Link>
-                </li>
-
-                <li>
-                  <Link className="dropdown-item" to="/contact-o-pedia">
-                    Contact App
-                  </Link>
-                </li>
-              </ul>
+            <li className="nav-item">
+              <Link className="nav-link" to="/admin">
+                Admin
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/customer">
+                Customer
+              </Link>
             </li>
           </ul>
+        </div>
+        {/* Login Button - Right Corner */}
+        <div className="ms-auto">
+          {isAuthenticated ? (
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <Link className="btn btn-primary" to="/login">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

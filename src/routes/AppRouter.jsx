@@ -10,6 +10,9 @@ import ProductLayout from "../pages/product/ProductLayout";
 import HomeCategory from "../pages/product/category/HomeCategory";
 import ClothingCategory from "../pages/product/category/ClothingCategory";
 import ElectronicCategory from "../pages/product/category/ElectronicCategory";
+import Login from "../pages/auth/Login";
+import CustomerPortal from "../pages/customer/CustomerPortal";
+import AdminPortal from "../pages/admin/AdminPortal";
 
 function AppRouter() {
   return (
@@ -25,6 +28,9 @@ function AppRouter() {
         <Route path="clothing" element={<ClothingCategory />} />
       </Route>
       <Route path="/route-o-pedia/item/:id" element={<ProductDetails />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/customer" element={<CustomerPortal />} />
+      <Route path="/admin" element={<AdminPortal />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );
