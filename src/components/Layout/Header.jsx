@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Images/react.png";
-import { getAuthState, logout } from "../../utility/authUtility";
+import { getAuthState, hasRole, logout } from "../../utility/authUtility";
 
 function Header() {
   const navigate = useNavigate();
@@ -54,16 +54,20 @@ function Header() {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/admin">
-                Admin
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/customer">
-                Customer
-              </Link>
-            </li>
+            {isAuthenticated && hasRole("admin") && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  Admin
+                </Link>
+              </li>
+            )}
+            {isAuthenticated && hasRole("customer") && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/customer">
+                  Customer
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         {/* Login Button - Right Corner */}

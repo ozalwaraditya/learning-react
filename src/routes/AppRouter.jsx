@@ -13,6 +13,8 @@ import ElectronicCategory from "../pages/product/category/ElectronicCategory";
 import Login from "../pages/auth/Login";
 import CustomerPortal from "../pages/customer/CustomerPortal";
 import AdminPortal from "../pages/admin/AdminPortal";
+import ProtectedRoute from "./ProtectedRoute";
+import RoleBasedRoute from "./RoleBasedRoute";
 
 function AppRouter() {
   return (
@@ -27,10 +29,32 @@ function AppRouter() {
         <Route path="home" element={<HomeCategory />} />
         <Route path="clothing" element={<ClothingCategory />} />
       </Route>
-      <Route path="/route-o-pedia/item/:id" element={<ProductDetails />} />
+      <Route
+        path="/route-o-pedia/item/:id"
+        element={
+          <ProtectedRoute>
+            <ProductDetails />
+          </ProtectedRoute>
+        }
+      />
+      {/* <Route path="/route-o-pedia/item/:id" element={<ProductDetails />} /> */}
+      <Route
+        path="/customer"
+        element={
+          <RoleBasedRoute allowedRoles={["customer"]}>
+            <CustomerPortal />
+          </RoleBasedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <RoleBasedRoute allowedRoles={["admin"]}>
+            <AdminPortal />
+          </RoleBasedRoute>
+        }
+      />
       <Route path="/login" element={<Login />} />
-      <Route path="/customer" element={<CustomerPortal />} />
-      <Route path="/admin" element={<AdminPortal />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

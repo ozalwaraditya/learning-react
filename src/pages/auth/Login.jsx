@@ -1,8 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setAuthState } from "../../utility/authUtility";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   const handleDummyLogin = (role) => {
     const users = {
       admin: {
@@ -19,7 +22,7 @@ function Login() {
 
     setAuthState(true, users[role]);
 
-    navigate("/");
+    navigate(from);
   };
 
   return (

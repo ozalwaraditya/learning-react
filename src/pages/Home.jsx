@@ -21,6 +21,13 @@ function Home() {
       description: "A project to practice React Routing.",
       path: "/route-o-pedia",
     },
+    {
+      id: 4,
+      title: "Protected Routes Auth",
+      description:
+        "A project to practice authentication and protected routes in React.",
+      path: "/protected-routes-auth",
+    },
   ];
 
   return (
