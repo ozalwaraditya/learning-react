@@ -5,7 +5,7 @@ import {
   increment,
   decrementMultiplier,
   incrementMultiplier,
-} from "../../redux/slice/CounterSlice";
+} from "../../redux/slice/counterSlice";
 
 function CounterLayout() {
   const count = useSelector((state) => state.counterStore.count);

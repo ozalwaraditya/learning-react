@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { counterReducer } from "./slice/CounterSlice";
+import { counterReducer } from "./slice/counterSlice";
 import { destinationReducer } from "./slice/destinationSlice";
 
 // Multiple can be created
