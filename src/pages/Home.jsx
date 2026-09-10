@@ -26,7 +26,7 @@ function Home() {
       title: "Protected Routes Auth",
       description:
         "A project to practice authentication and protected routes in React.",
-      path: "/protected-routes-auth",
+      path: "/login",
     },
     {
       id: 5,
