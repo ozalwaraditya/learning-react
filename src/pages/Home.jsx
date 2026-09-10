@@ -28,6 +28,13 @@ function Home() {
         "A project to practice authentication and protected routes in React.",
       path: "/protected-routes-auth",
     },
+    {
+      id: 5,
+      title: "React Redux",
+      description:
+        "A project to practice global state management using Redux and Redux Toolkit in React.",
+      path: "/react-redux",
+    },
   ];
 
   return (

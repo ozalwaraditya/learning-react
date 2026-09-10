@@ -15,6 +15,7 @@ import CustomerPortal from "../pages/customer/CustomerPortal";
 import AdminPortal from "../pages/admin/AdminPortal";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleBasedRoute from "./RoleBasedRoute";
+import ReduxLayout from "../pages/redux/ReduxLayout";
 
 function AppRouter() {
   return (
@@ -55,6 +56,7 @@ function AppRouter() {
         }
       />
       <Route path="/login" element={<Login />} />
+      <Route path="/react-redux" element={<ReduxLayout />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );
