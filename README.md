@@ -1,16 +1,110 @@
-# React + Vite
+# Learning React ⚛️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A hands-on React learning project built with modern frontend technologies. This repository contains practical implementations of React concepts, routing, Redux, API integration, reusable components, and more.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* React 19
+* Vite
+* JavaScript / JSX
+* React Router DOM
+* Redux Toolkit
+* React Redux
+* Axios
+* ESLint
 
-## React Compiler
+## 📁 Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```text
+src/
+├── assets/
+├── components/
+├── data/
+├── pages/
+├── redux/
+├── routes/
+├── utility/
+├── App.jsx
+└── main.jsx
+```
 
-## Expanding the ESLint configuration
+## ✨ Concepts Covered
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React Functional Components
+* Props & State
+* Hooks
+* Component Reusability
+* React Router
+* Redux Toolkit
+* API Integration with Axios
+* Conditional Rendering
+* Forms & Events
+* Project Structure & Best Practices
+
+## 🛠️ Getting Started
+
+Follow these steps to run the project locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/ozalwaraditya/learning-react.git
+cd learning-react
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the Development Server
+
+```bash
+npm run dev
+```
+
+The application will start on the local development server.
+
+## 📜 Available Scripts
+
+| Command         | Description                      |
+| --------------- | -------------------------------- |
+| `npm run dev`   | Start the development server     |
+| `npm run build` | Build the project for production |
+
+## 🔮 Future Scope
+
+This project will continue to evolve as I explore more advanced React and frontend development concepts.
+
+* Advanced React patterns and performance optimization
+* RTK Query for API state management and caching
+* TypeScript migration
+* Custom Hooks and advanced state management
+* React Testing Library & Vitest
+* Authentication & protected routes
+* Better UI/UX and accessibility
+* CI/CD and production deployment
+
+## 🎯 Goal
+
+The goal of this repository is to continuously learn and implement modern React development practices and gradually evolve this project into a scalable, production-ready frontend application.
+
+## 👨‍💻 Author
+
+**Aditya Ozalwar**
+
+GitHub: [Aditya Ozalwar](https://github.com/ozalwaraditya)
+
+## ⭐ Support
+
+If you find this project useful, feel free to:
+
+* ⭐ Star the repository
+* 👀 Explore the source code
+* 📚 Follow the learning journey
+* 💡 Suggest improvements
+
+---
+
+Made with ❤️ while learning React ⚛️
