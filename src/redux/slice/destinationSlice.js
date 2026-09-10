@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resetComplete } from "../action/actions";
 
 const initialState = {
   destination: [
@@ -32,6 +33,11 @@ const destinationSlice = createSlice({
     resetFromDestinationSlice: (state, action) => {
       console.log(action);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(resetComplete, (state, action) => {
+      console.log(action);
+    });
   },
 });
 

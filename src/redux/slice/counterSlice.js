@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { resetFromDestinationSlice } from "./destinationSlice";
+import { resetComplete } from "../action/actions";
 // Slice = Piece of Redux state
 // Contains reducers and actions
 
@@ -30,7 +31,10 @@ export const counterSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase("destination/resetFromDestinationSlice", (state) => {
+    // builder.addCase(resetFromDestinationSlice.toString(), (state) => {
+    //   state.count = 0;
+    // });
+    builder.addCase(resetComplete, (state) => {
       state.count = 0;
     });
   },

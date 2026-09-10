@@ -1,3 +1,4 @@
+import { resetComplete } from "../../redux/action/actions";
 import { resetFromDestinationSlice } from "../../redux/slice/destinationSlice";
 import CounterLayout from "./CounterLayout";
 import DestinationLayout from "./DestinationLayout";
@@ -15,8 +16,11 @@ function ReduxLayout() {
       <div>
         <h2 className="mb-4">Destination Details Display</h2>
         <button
+          // onClick={() => {
+          //   dispatch(resetFromDestinationSlice());
+          // }}
           onClick={() => {
-            dispatch(resetFromDestinationSlice());
+            dispatch(resetComplete());
           }}
           className="btn btn-primary"
         >
